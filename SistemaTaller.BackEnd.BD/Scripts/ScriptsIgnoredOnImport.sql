@@ -1,0 +1,6 @@
+﻿
+CREATE DATABASE Taller2
+GO
+
+USE Taller2
+GO

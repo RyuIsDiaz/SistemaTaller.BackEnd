@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>SistemaTaller.BackEnd.BD</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{6064e2ea-54e0-4aaf-9b7c-0572b35d2d98}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>SistemaTaller.BackEnd.BD</RootNamespace>
+    <AssemblyName>SistemaTaller.BackEnd.BD</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables\" />
+    <Folder Include="Views\" />
+    <Folder Include="Functions\" />
+    <Folder Include="Stored Procedures\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Mecanicos.sql" />
+    <Build Include="Tables\Clientes.sql" />
+    <Build Include="Tables\Talleres.sql" />
+    <Build Include="Tables\MarcaRepuestos.sql" />
+    <Build Include="Tables\Repuestos.sql" />
+    <Build Include="Tables\MarcaVehiculos.sql" />
+    <Build Include="Tables\Vehiculos.sql" />
+    <Build Include="Tables\VehiculosCliente.sql" />
+    <Build Include="Tables\MecanicosTaller.sql" />
+    <Build Include="Tables\EstadoReparaciones.sql" />
+    <Build Include="Tables\Reparaciones.sql" />
+    <Build Include="Tables\RepuestoReparaciones.sql" />
+    <Build Include="Tables\ErroresBD.sql" />
+    <Build Include="Views\VW_Mecanicos_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_Clientes_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_Talleres_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_MarcaRepuestos_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_Repuestos_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_MarcaVehiculos_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_Vehiculos_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_VehiculosCliente_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_MecanicosTaller_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_EstadoReparaciones_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_Reparaciones_SeleccionarTodos.sql" />
+    <Build Include="Views\VW_RepuestoReparaciones_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_Mecanicos_VerificaExistenciaPorIdentificaciones.sql" />
+    <Build Include="Functions\FN_Clientes_VerificaExistenciaPorIdentificacion.sql" />
+    <Build Include="Functions\FN_Talleres_VerificaExistenciaPorId.sql" />
+    <Build Include="Functions\FN_MarcaRepuestos_VerificaExistenciaPorId.sql" />
+    <Build Include="Functions\FN_Repuestos_VerificaExistenciaPorCodigoRepuesto.sql" />
+    <Build Include="Functions\FN_MarcaVehiculos_VerificaExistenciaPorId.sql" />
+    <Build Include="Functions\FN_Vehiculo_VerificaExistenciaPorPlaca.sql" />
+    <Build Include="Functions\FN_VehiculosCliente_VerificaExistenciaPorPlacaVehiculo.sql" />
+    <Build Include="Functions\FN_MecanicosTaller_VerificaExistenciaPorIdMecanicos.sql" />
+    <Build Include="Functions\FN_EstadoReparaciones_VerificaExistenciaPorId.sql" />
+    <Build Include="Functions\FN_Reparaciones_VerificaExistenciaPorIdReparaciones.sql" />
+    <Build Include="Functions\FN_RepuestoReparaciones_VerificaExistenciaPorIdReparaciones.sql" />
+    <Build Include="Functions\FN_Mecanicos_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_Mecanicos_SeleccionarPorIdentificaciones.sql" />
+    <Build Include="Functions\FN_Clientes_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_Clientes_SeleccionarPorIdentificacion.sql" />
+    <Build Include="Functions\FN_Talleres_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_Talleres_SeleccionarPorId.sql" />
+    <Build Include="Functions\FN_MarcaRepuestos_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_MarcaRepuestos_SeleccionarPorId.sql" />
+    <Build Include="Functions\FN_Repuestos_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_Repuestos_SeleccionarPorCodigoRepuesto.sql" />
+    <Build Include="Functions\FN_MarcaVehiculos_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_MarcaVehiculos_SeleccionarPorId.sql" />
+    <Build Include="Functions\FN_Vehiculos_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_Vehiculos_SeleccionarPorId.sql" />
+    <Build Include="Functions\FN_VehiculosCliente_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_VehiculosCliente_SeleccionarPorId.sql" />
+    <Build Include="Functions\FN_MecanicosTaller_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_MecanicosTaller_SeleccionarPorId.sql" />
+    <Build Include="Functions\FN_EstadoReparaciones_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_EstadoReparaciones_SeleccionarPorId.sql" />
+    <Build Include="Functions\FN_Reparaciones_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_Reparaciones_SeleccionarPorIdReparaciones.sql" />
+    <Build Include="Functions\FN_RepuestoReparaciones_SeleccionarTodos.sql" />
+    <Build Include="Functions\FN_RepuestoReparaciones_SeleccionarPorIdReparaciones.sql" />
+    <Build Include="Stored Procedures\SP_ErroresBD_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_Mecanicos_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_Mecanicos_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_Mecanico_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_Clientes_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_Clientes_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_Clientes_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_Talleres_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_Talleres_Eliminar.sql" />
+    <Build Include="Stored Procedures\SP_talleres_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_MarcaRepuestos_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_MarcasRepuestos_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_MarcaRepuestos_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_Repuestos_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_Repuestos_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_Repuestos_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_MarcaVehiculos_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_MarcaVehiculos_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_MarcaVehiculos_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_Vehiculos_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_Vehiculos_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_Vehiuculo_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_VehiculosCliente_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_VehiculosCliente_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_VehiculosCliente_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_MecanicosTaller_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_MecanicosTaller_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_MecanicosTaller_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_EstadosReparaciones_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_EstadosReparaciones_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_EstadosReparaciones_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_EstadosReparaciones_Insertar_1.sql" />
+    <Build Include="Stored Procedures\SP_Reparaciones_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_Reparaciones_Actualizar.sql" />
+    <Build Include="Stored Procedures\SP_RepuestoReparaciones_Insertar.sql" />
+    <Build Include="Stored Procedures\SP_RepuestoReparaciones_Desactivar.sql" />
+    <Build Include="Stored Procedures\SP_RepuestoReparaciones_Actualizar.sql" />
+    <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+  </ItemGroup>
+</Project>

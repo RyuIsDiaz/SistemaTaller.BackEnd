@@ -19,7 +19,6 @@ CREATE TABLE Mecanicos(
 )
 GO
 
------Documentacion a Tabla
 
 EXEC sp_addextendedproperty 
     @name = N'MS_Description',	@value = 'Datos del mecanico',
@@ -27,7 +26,6 @@ EXEC sp_addextendedproperty
     @level1type = N'Table',		@level1name = 'Mecanicos'
 GO
 
------Documentacion a campos
 
 EXEC sp_addextendedproperty  
 	@name = N'MS_Description',	@value = 'Identificacion del mecanico',
@@ -1078,7 +1076,7 @@ EXEC sp_addextendedproperty
 GO
 
 ---------------------------------------------------------------------------------------------------------------
-CREATE OR ALTER PROCEDURE SP_ErroresBD_Insertar
+CREATE PROCEDURE SP_ErroresBD_Insertar
 	@CreadoPor VARCHAR(60)
 	AS 
 	BEGIN
@@ -1293,7 +1291,7 @@ RETURNS TABLE AS
 GO
 --------SP's Tabla Clientes
 
-CREATE OR ALTER PROCEDURE SP_Clientes_Insertar
+CREATE PROCEDURE SP_Clientes_Insertar
 	@Identificacion VARCHAR(20),
 	@Nombre VARCHAR(20),
 	@Apellidos VARCHAR(30),
@@ -1325,7 +1323,7 @@ CREATE OR ALTER PROCEDURE SP_Clientes_Insertar
 		SET @DetalleError = 'Error insertando un Cliente: ' + @NumeroDeError
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_Clientes_Desactivar
+CREATE PROCEDURE SP_Clientes_Desactivar
 	@Identificacion VARCHAR(20),
 	@ModificadoPor VARCHAR(20),
 	@ExisteError BIT OUTPUT,
@@ -1367,7 +1365,7 @@ CREATE OR ALTER PROCEDURE SP_Clientes_Desactivar
 
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_Clientes_Actualizar
+CREATE PROCEDURE SP_Clientes_Actualizar
 	@Identificacion VARCHAR(20),
 	@Nombre VARCHAR(20),
 	@Apellidos VARCHAR(30),
@@ -1456,7 +1454,7 @@ RETURNS TABLE AS
 GO
 -----SP's Tabla Talleres
 
-CREATE OR ALTER PROCEDURE SP_Talleres_Insertar
+CREATE PROCEDURE SP_Talleres_Insertar
 	@Id INT,
 	@Nombre VARCHAR(45),
 	@Telefono VARCHAR(15),
@@ -1489,7 +1487,7 @@ CREATE OR ALTER PROCEDURE SP_Talleres_Insertar
 	END CATCH
 
 GO
-CREATE OR ALTER PROCEDURE SP_Talleres_Eliminar
+CREATE PROCEDURE SP_Talleres_Eliminar
 	@Id VARCHAR(20),
 	@ModificadoPor VARCHAR(60),
 	@ExisteError BIT OUTPUT,
@@ -1531,7 +1529,7 @@ CREATE OR ALTER PROCEDURE SP_Talleres_Eliminar
 
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_talleres_Actualizar
+CREATE PROCEDURE SP_talleres_Actualizar
 	@Id INT,
 	@Nombre VARCHAR(45),
 	@Telefono VARCHAR(15),
@@ -1621,7 +1619,7 @@ RETURNS TABLE AS
 GO
 ----SP's Tabla MarcaRepuestos
 
-CREATE OR ALTER PROCEDURE SP_MarcaRepuestos_Insertar
+CREATE PROCEDURE SP_MarcaRepuestos_Insertar
 	@Id INT,
 	@Nombre VARCHAR(20),
 	@CreadoPor VARCHAR(20),
@@ -1651,7 +1649,7 @@ CREATE OR ALTER PROCEDURE SP_MarcaRepuestos_Insertar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_MarcasRepuestos_Desactivar 
+CREATE PROCEDURE SP_MarcasRepuestos_Desactivar 
 	@Id INT,
 	@ModificadoPor VARCHAR(20),
 	@ExisteError BIT OUTPUT,
@@ -1695,7 +1693,7 @@ CREATE OR ALTER PROCEDURE SP_MarcasRepuestos_Desactivar
 
 	GO
 
-CREATE OR ALTER PROCEDURE SP_MarcaRepuestos_Actualizar
+CREATE PROCEDURE SP_MarcaRepuestos_Actualizar
 	@Id INT,
 	@Nombre VARCHAR(20),
     @Activo BIT,
@@ -1817,7 +1815,7 @@ CREATE PROCEDURE SP_Repuestos_Insertar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_Repuestos_Desactivar
+CREATE PROCEDURE SP_Repuestos_Desactivar
 	@CodigoRepuesto VARCHAR (25),
 	@ModificadoPor VARCHAR(60),
 	@ExisteError BIT OUTPUT,
@@ -1861,7 +1859,7 @@ CREATE OR ALTER PROCEDURE SP_Repuestos_Desactivar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_Repuestos_Actualizar
+CREATE PROCEDURE SP_Repuestos_Actualizar
     @CodigoRepuesto VARCHAR(25),
 	@Nombre VARCHAR(20) ,
 	@IdMarca INT,
@@ -1956,7 +1954,7 @@ GO
 ----SP's de la Tabla MarcaVehiculos
 
 
-CREATE OR ALTER PROCEDURE SP_MarcaVehiculos_Insertar
+CREATE PROCEDURE SP_MarcaVehiculos_Insertar
 	@Id INT,
 	@Nombre VARCHAR(20),
 	@CreadoPor VARCHAR(20),
@@ -1986,7 +1984,7 @@ CREATE OR ALTER PROCEDURE SP_MarcaVehiculos_Insertar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_MarcaVehiculos_Desactivar
+CREATE PROCEDURE SP_MarcaVehiculos_Desactivar
 	@Id INT,
 	@ModificadoPor VARCHAR(20),
 	@ExisteError BIT OUTPUT,
@@ -2030,7 +2028,7 @@ CREATE OR ALTER PROCEDURE SP_MarcaVehiculos_Desactivar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_MarcaVehiculos_Actualizar
+CREATE PROCEDURE SP_MarcaVehiculos_Actualizar
 	@Id INT,
 	@Nombre VARCHAR(20),
 	@Activo BIT,
@@ -2120,7 +2118,7 @@ RETURNS TABLE AS
 GO
 ------SP's de la Tabla Vehiculos
 
-CREATE OR ALTER PROCEDURE SP_Vehiculos_Insertar
+CREATE PROCEDURE SP_Vehiculos_Insertar
 	@Placa VARCHAR(10),
 	@IdMarca INT,
 	@Modelo INT,
@@ -2151,7 +2149,7 @@ CREATE OR ALTER PROCEDURE SP_Vehiculos_Insertar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_Vehiculos_Desactivar
+CREATE PROCEDURE SP_Vehiculos_Desactivar
 	@Placa VARCHAR(10),
 	@ModificadoPor VARCHAR(60),
 	@ExisteError BIT OUTPUT,
@@ -2195,7 +2193,7 @@ CREATE OR ALTER PROCEDURE SP_Vehiculos_Desactivar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_Vehiuculo_Actualizar
+CREATE PROCEDURE SP_Vehiuculo_Actualizar
 	@Placa VARCHAR(10),
 	@IdMarca INT,
 	@Modelo INT,
@@ -2288,7 +2286,7 @@ GO
 ------SP's de la Tabla VehiculosCliente
 
 
-CREATE OR ALTER PROCEDURE SP_VehiculosCliente_Insertar
+CREATE PROCEDURE SP_VehiculosCliente_Insertar
 	@IdentificacionCliente VARCHAR(20),
 	@Placa VARCHAR(10),
 	@CreadoPor VARCHAR(20),
@@ -2362,7 +2360,7 @@ CREATE PROCEDURE SP_VehiculosCliente_Desactivar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_VehiculosCliente_Actualizar
+CREATE PROCEDURE SP_VehiculosCliente_Actualizar
 	@Placa VARCHAR(10),
 	@Activo BIT,
 	@ModificadoPor VARCHAR(20),
@@ -2450,7 +2448,7 @@ GO
 
 ------SP's de la Tabla MecanicosTaller
 
-CREATE OR ALTER PROCEDURE SP_MecanicosTaller_Insertar
+CREATE PROCEDURE SP_MecanicosTaller_Insertar
 	@IdMecanicos VARCHAR(20),
 	@IdTalleres INT,
 	@CreadoPor VARCHAR(20),
@@ -2480,7 +2478,7 @@ CREATE OR ALTER PROCEDURE SP_MecanicosTaller_Insertar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_MecanicosTaller_Desactivar
+CREATE PROCEDURE SP_MecanicosTaller_Desactivar
 	@IdMecanicos VARCHAR(20),
 	@ModificadoPor VARCHAR(60),
 	@ExisteError BIT OUTPUT,
@@ -2524,7 +2522,7 @@ CREATE OR ALTER PROCEDURE SP_MecanicosTaller_Desactivar
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_MecanicosTaller_Actualizar
+CREATE PROCEDURE SP_MecanicosTaller_Actualizar
 	@IdMecanicos VARCHAR(20),
 	@IdTalleres INT,
 	@Activo BIT,
@@ -2569,14 +2567,13 @@ CREATE OR ALTER PROCEDURE SP_MecanicosTaller_Actualizar
 	END CATCH
 
 GO
----------FN's y vistas de la tabla EstadoReparaciones
 
 CREATE VIEW VW_EstadoReparaciones_SeleccionarTodos
 AS 
 	SELECT Id FROM EstadoReparaciones WHERE Activo = 1
 
 GO
-CREATE  FUNCTION FN_EstadoReparaciones_VerificaExistenciaPorId ( 
+CREATE FUNCTION FN_EstadoReparaciones_VerificaExistenciaPorId ( 
 	@Id INT)
 RETURNS BIT AS
 BEGIN
@@ -2605,9 +2602,8 @@ RETURNS TABLE AS
 		WHERE 
 			EstadoReparaciones.Id = @Id
 GO
------SP's de la tabla EstadoReparaciones
 
-CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Insertar
+CREATE PROCEDURE SP_EstadosReparaciones_Insertar
 	@Id INT,
     @Estados VARCHAR (20),
 	@CreadoPor VARCHAR(20),
@@ -2635,7 +2631,7 @@ CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Insertar
 		SET @DetalleError = 'Error insertando un EstadoReparación: ' + @NumeroDeError
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Desactivar
+CREATE PROCEDURE SP_EstadosReparaciones_Desactivar
 	@Id INT,
 	@ModificadoPor VARCHAR(20),
 	@ExisteError BIT OUTPUT,
@@ -2677,7 +2673,7 @@ CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Desactivar
 
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Actualizar
+CREATE PROCEDURE SP_EstadosReparaciones_Actualizar
     @Id INT,
 	@Estados VARCHAR(15),
 	@Activo BIT,
@@ -2722,7 +2718,6 @@ CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Actualizar
 		
 	END CATCH
 GO
------ FN's y vistas de la tabla Reparaciones
 
 
 CREATE VIEW VW_Reparaciones_SeleccionarTodos
@@ -2757,9 +2752,8 @@ RETURNS TABLE AS
 			Reparaciones.IdReparaciones = @IdReparaciones
 
 GO
------SP's de la tabla Reparaciones
 
-CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Insertar
+CREATE PROCEDURE SP_EstadosReparaciones_Insertar
 @IdReparaciones INT,
 	@FechasIngreso DATE,
 	@FechasSalida DATE,
@@ -2797,7 +2791,7 @@ CREATE OR ALTER PROCEDURE SP_EstadosReparaciones_Insertar
 	END CATCH
 
 GO
-CREATE OR ALTER PROCEDURE SP_Reparaciones_Desactivar
+CREATE PROCEDURE SP_Reparaciones_Desactivar
 @IdReparaciones INT,
 	@FechasIngreso DATE,
 	@FechasSalida DATE,
@@ -2847,7 +2841,7 @@ CREATE OR ALTER PROCEDURE SP_Reparaciones_Desactivar
 
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_Reparaciones_Actualizar
+CREATE PROCEDURE SP_Reparaciones_Actualizar
 @IdReparaciones INT,
 	@FechasIngreso DATE,
 	@FechasSalida DATE,
@@ -2900,7 +2894,6 @@ CREATE OR ALTER PROCEDURE SP_Reparaciones_Actualizar
 		END CATCH
 
 GO
---------FN's y vista de la tabla RepuestoReparaciones
 
 CREATE VIEW VW_RepuestoReparaciones_SeleccionarTodos
 AS 
@@ -2938,10 +2931,9 @@ RETURNS TABLE AS
 			RepuestoReparaciones.IdReparaciones = @IdReparaciones
 
 GO
-------------SP's de la tabla RepuestoReparaciones
 
 
-CREATE OR ALTER PROCEDURE SP_RepuestoReparaciones_Insertar
+CREATE PROCEDURE SP_RepuestoReparaciones_Insertar
 @IdReparaciones INT,
 	@CodigoRepuestos VARCHAR(25),
 	@CreadoPor VARCHAR(20),
@@ -2969,7 +2961,7 @@ CREATE OR ALTER PROCEDURE SP_RepuestoReparaciones_Insertar
 		SET @DetalleError = 'Error insertando un RepuestoReparación: ' + @NumeroDeError
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_RepuestoReparaciones_Desactivar
+CREATE PROCEDURE SP_RepuestoReparaciones_Desactivar
 	@IdReparaciones INT,
 	@CodigoRepuestos VARCHAR(25),
 	@ModificadoPor VARCHAR(20),
@@ -3012,7 +3004,7 @@ CREATE OR ALTER PROCEDURE SP_RepuestoReparaciones_Desactivar
 
 	END CATCH
 GO
-CREATE OR ALTER PROCEDURE SP_RepuestoReparaciones_Actualizar
+CREATE PROCEDURE SP_RepuestoReparaciones_Actualizar
     @IdReparaciones INT,
 	@CodigoRepuestos VARCHAR(25),
 	@Activo BIT,
