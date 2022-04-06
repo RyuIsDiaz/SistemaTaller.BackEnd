@@ -29,6 +29,12 @@ EXEC sp_addextendedproperty
    	@level2type = N'Column',	@level2name = 'Nombre'
 GO
 EXEC sp_addextendedproperty 
+	@name = N'MS_Description',	@value = 'Condicion en la que se encuentra la marca del vehiculo',
+   	@level0type = N'Schema',	@level0name = 'dbo',
+   	@level1type = N'Table',		@level1name = 'MarcaVehiculos', 
+   	@level2type = N'Column',	@level2name = 'Activo'
+GO
+EXEC sp_addextendedproperty 
 	@name = N'MS_Description',	@value = 'Fecha de creacion del registro',
    	@level0type = N'Schema',	@level0name = 'dbo',
    	@level1type = N'Table',		@level1name = 'MarcaVehiculos', 
