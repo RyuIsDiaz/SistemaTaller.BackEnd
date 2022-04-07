@@ -155,12 +155,14 @@
     <Build Include="Stored Procedures\SP_EstadosReparaciones_Insertar.sql" />
     <Build Include="Stored Procedures\SP_EstadosReparaciones_Desactivar.sql" />
     <Build Include="Stored Procedures\SP_EstadosReparaciones_Actualizar.sql" />
-    <Build Include="Stored Procedures\SP_EstadosReparaciones_Insertar_1.sql" />
     <Build Include="Stored Procedures\SP_Reparaciones_Desactivar.sql" />
     <Build Include="Stored Procedures\SP_Reparaciones_Actualizar.sql" />
     <Build Include="Stored Procedures\SP_RepuestoReparaciones_Insertar.sql" />
     <Build Include="Stored Procedures\SP_RepuestoReparaciones_Desactivar.sql" />
     <Build Include="Stored Procedures\SP_RepuestoReparaciones_Actualizar.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SistemaTaller.BackEnd.BD.publish.xml" />
   </ItemGroup>
 </Project>
