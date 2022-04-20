@@ -44,7 +44,7 @@ EXEC sp_addextendedproperty
 	@name = N'MS_Description',	@value = 'Fecha de modificacion del registro',
    	@level0type = N'Schema',	@level0name = 'dbo',
    	@level1type = N'Table',		@level1name = 'MarcaVehiculos', 
-   	@level2type = N'Column',	@level2name = 'FechaModificacion'
+   	@level2type = N'Column',	@level2name = 'FechaModificación'
 GO
 EXEC sp_addextendedproperty 
 	@name = N'MS_Description',	@value = 'Nombre del usuario que crea el registro',
