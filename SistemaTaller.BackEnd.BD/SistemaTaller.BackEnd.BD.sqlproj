@@ -161,6 +161,7 @@
     <Build Include="Stored Procedures\SP_RepuestoReparaciones_Desactivar.sql" />
     <Build Include="Stored Procedures\SP_RepuestoReparaciones_Actualizar.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <Build Include="Stored Procedures\SP_SysObtenerClaseDesdeTabla.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SistemaTaller.BackEnd.BD.publish.xml" />
