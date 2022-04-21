@@ -2,15 +2,14 @@
 
 namespace SistemaTaller.BackEnd.API.Dtos
 {
-    public class VehiculoClienteDto
+    public class MecanicoTaller
     {
         [Required(ErrorMessage = "{0} es un campo obligatorio")]
         [MaxLength(20, ErrorMessage = "{0} tiene que tener máximo {1} caracteres")]
-        public string IdentificacionCliente { get; set; }
+        public string IdMecanicos { get; set; }
 
         [Required(ErrorMessage = "{0} es un campo obligatorio")]
-        [MaxLength(10, ErrorMessage = "{0} tiene que tener máximo {1} caracteres")]
-        public string Placa { get; set; }
+        public int IdTalleres { get; set; }
 
         public bool? Activo { get; set; }
     }
