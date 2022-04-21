@@ -2,9 +2,7 @@
 
 namespace SistemaTaller.BackEnd.API.Dtos
 {
-	/// <summary>
-	/// 
-	/// </summary>
+
     public class MecanicoDto
     {
 		[Required(ErrorMessage = "{0} es un campo obligatorio")]

@@ -30,5 +30,6 @@ namespace SistemaTaller.BackEnd.API.Dtos
 		public string Direccion { get; set; }
 
 		public bool? Activo { get; set; }
+
 	}
 }
