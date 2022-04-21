@@ -4,7 +4,7 @@ namespace SistemaTaller.BackEnd.API.UnitOfWork
 {
     public interface IUnitOfWorkRepository
     {
-        //Acá van todos los repositorios del sistema.
+        //Acá van todos los repositorios del sistema
         IClienteRepository ClientesRepository { get; }
         IEstadoReparacionesRepository EstadoReparacionesRepository { get; }
         IMarcaRepuestosRepository MarcaRepuestosRepository { get; }
