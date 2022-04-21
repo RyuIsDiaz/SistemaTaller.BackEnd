@@ -23,7 +23,7 @@ namespace SistemaTaller.BackEnd.API.UnitOfWork.SqlServer
 
         public UnitOfWorkSqlServerRepository(SqlConnection context, SqlTransaction transaction)
         {
-            //Acá van todos los otros repositorios
+            //Acá van todos los otros repositorios.
 
             ClientesRepository = new ClienteRepository(context, transaction);
 
