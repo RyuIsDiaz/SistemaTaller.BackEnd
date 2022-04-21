@@ -14,7 +14,7 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
 
         public void Actualizar(Cliente cliente)
         {
-            //Asi se hace cuando son consultas planas, que no se usa SPs ni Funciones
+            //Asi se hace cuando son consultas planas, que no se usa SPs ni Funciones.
             //var query = "UPDATE Aula SET Horario = @Horario, CodigoCurso  = @CodigoCurso, FechaModificacion = @FechaModificacion, ModificadoPor = @ModificadoPor WHERE NumeroAula = @NumeroAula";
             //var command = CreateCommand(query);
 
