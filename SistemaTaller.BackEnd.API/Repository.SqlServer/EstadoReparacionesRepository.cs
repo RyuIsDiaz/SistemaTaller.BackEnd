@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace SistemaTaller.BackEnd.API.Repository.SqlServer
 {
-    public class EstadoReparacionesRepository : ConexionBD, IClienteRepository
+    public class EstadoReparacionesRepository : ConexionBD, IEstadoReparacionesRepository
     {
         public EstadoReparacionesRepository(SqlConnection context, SqlTransaction transaction)
         {
