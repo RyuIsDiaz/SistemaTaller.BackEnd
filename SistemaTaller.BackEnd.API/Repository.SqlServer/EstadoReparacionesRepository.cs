@@ -112,7 +112,7 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
                 EstadoReparacion estadoReparacionSeleccionado = new();
 
                 estadoReparacionSeleccionado.Id = Convert.ToInt32(reader["Id"]);
-                estadoReparacionSeleccionado.Estados = (string)reader["Nombre"];
+                estadoReparacionSeleccionado.Estados = (string)reader["Estados"];
 
                 estadoReparacionSeleccionado.Activo = Convert.ToBoolean(reader["Activo"]);
                 estadoReparacionSeleccionado.FechaCreacion = Convert.ToDateTime(reader["FechaCreacion"]);
