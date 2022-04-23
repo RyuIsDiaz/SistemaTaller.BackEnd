@@ -2,6 +2,6 @@
 {
     public class MecanicosRepository : ConexionBD, IMecanicosRepository
     {
-        
+        //hola
     }
 }
