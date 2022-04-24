@@ -30,10 +30,10 @@ namespace SistemaTaller.BackEnd.API.UnitOfWork.SqlServer
             MarcaVehiculosRepository = new MarcaVehiculosRepository(context, transaction);
             MecanicosRepository = new MecanicosRepository(context, transaction);
             MecanicosTallerRepository = new MecanicosTallerRepository(context, transaction);
-            //ReparacionesRepository = new ReparacionesRepository(context, transaction);
-            //RepuestoReparacionesRepository = new RepuestoReparacionesRepository(context, transaction);
-            //RepuestosRepository = new RepuestosRepository(context, transaction);
-            //TalleresRepository = new TalleresRepository(context, transaction);
+            ReparacionesRepository = new ReparacionesRepository(context, transaction);
+            RepuestoReparacionesRepository = new RepuestoReparacionesRepository(context, transaction);
+            RepuestosRepository = new RepuestosRepository(context, transaction);
+            TalleresRepository = new TalleresRepository(context, transaction);
             //VehiculosClienteRepository = new VehiculosClienteRepository(context, transaction);
             //VehiculosRepository = new VehiculosRepository(context, transaction);
         }
