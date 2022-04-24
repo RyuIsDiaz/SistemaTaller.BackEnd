@@ -28,8 +28,8 @@ namespace SistemaTaller.BackEnd.API.UnitOfWork.SqlServer
             EstadoReparacionesRepository = new EstadoReparacionesRepository(context, transaction);
             MarcaRepuestosRepository = new MarcaRepuestosRepository(context, transaction);
             MarcaVehiculosRepository = new MarcaVehiculosRepository(context, transaction);
-            //MecanicosRepository = new MecanicosRepository(context, transaction);
-            //MecanicosTallerRepository = new MecanicosTallerRepository(context, transaction);
+            MecanicosRepository = new MecanicosRepository(context, transaction);
+            MecanicosTallerRepository = new MecanicosTallerRepository(context, transaction);
             //ReparacionesRepository = new ReparacionesRepository(context, transaction);
             //RepuestoReparacionesRepository = new RepuestoReparacionesRepository(context, transaction);
             //RepuestosRepository = new RepuestosRepository(context, transaction);
