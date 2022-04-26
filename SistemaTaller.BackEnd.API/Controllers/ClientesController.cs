@@ -40,17 +40,24 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // PUT api/<ClientesController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ClienteDto ClientesDTO)
+        public IActionResult Put(int id, [FromBody] ClienteDto ClienteDTO)
         {
+            
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Cliente ClientePorInsertar = new();
-                    ClientePorInsertar.IdentificacionDeCliente = ClienteDTO.IdentificacionDeCliente;
-                    ClientePorInsertar.NombreDeCliente = ClienteDTO.NombreDeCliente;
-                    ClientePorInsertar.CreadoPor = "diazgs";
-                    ServicioDeClientes.Insertar(ClientePorInsertar);
+                    Cliente ClientePorActualizar = new();
+                    ClientePorActualizar.IdentificacionDente = ClienteDTO.Identificacion;
+                    ClientePorActualizar.NombreDeCliente = ClienteDTO.Nombre;
+                    ClientePorActualizar.Apellidos = ClienteDTO.Apellidos;
+                    ClientePorActualizar.Telefono = ClienteDTO.Telefono;
+                    ClientePorActualizar.Email = ClienteDTO.Email;
+                    ClientePorActualizar.Direccion = ClienteDTO.Direccion;
+                    ClientePorActualizar.Activo = ClienteDTO.Activo;
+                    ClientePorActualizar.ModificadoPor = "fabian" ;
+                   
+                    ServicioDeClientes.Actualizar(ClientePorActualizar);
                     return Ok();
                 }
                 else
@@ -69,6 +76,16 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+             private string ObtenerErroresDeModeloInvalido()
+        {
+
+            var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
+                                                     .Select(k => ModelState[k].Errors.First().ErrorMessage);
+
+            string ListaDeErroresEnModeloConcatenados = string.Join("\n", ListaDeErroresEnModelo);
+
+            return ListaDeErroresEnModeloConcatenados;
+        }
         }
     }
 }

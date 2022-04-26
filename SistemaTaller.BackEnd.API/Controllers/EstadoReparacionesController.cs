@@ -8,6 +8,12 @@ namespace SistemaTaller.BackEnd.API.Controllers
     [ApiController]
     public class EstadoReparacionesController : ControllerBase
     {
+
+         private readonly IEstadoReparacionesService ServicioEstadoReparaciones;
+        public ClientesController(IEstadoReparacionesService EstadoReparacionesService)
+        {
+            ServicioEstadoReparaciones = EstadoReparacionesService;
+        }
         // GET: api/<EstadoReparacionesController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -38,6 +44,16 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+                 private string ObtenerErroresDeModeloInvalido()
+        {
+
+            var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
+                                                     .Select(k => ModelState[k].Errors.First().ErrorMessage);
+
+            string ListaDeErroresEnModeloConcatenados = string.Join("\n", ListaDeErroresEnModelo);
+
+            return ListaDeErroresEnModeloConcatenados;
+        }
         }
     }
 }

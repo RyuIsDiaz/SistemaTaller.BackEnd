@@ -38,6 +38,16 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+                 private string ObtenerErroresDeModeloInvalido()
+        {
+
+            var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
+                                                     .Select(k => ModelState[k].Errors.First().ErrorMessage);
+
+            string ListaDeErroresEnModeloConcatenados = string.Join("\n", ListaDeErroresEnModelo);
+
+            return ListaDeErroresEnModeloConcatenados;
+        }
         }
     }
 }
