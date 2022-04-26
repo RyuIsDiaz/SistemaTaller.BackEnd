@@ -1,3 +1,5 @@
+using SistemaTaller.BackEnd.API.Services;
+using SistemaTaller.BackEnd.API.Services.Interfaces;
 using SistemaTaller.BackEnd.API.UnitOfWork;
 using SistemaTaller.BackEnd.API.UnitOfWork.SqlServer;
 
@@ -12,7 +14,9 @@ builder.Services.AddSwaggerGen();
 
 //Aca van todos los servicios de cada Entidad
 builder.Services.AddTransient<IUnitOfWork, UnitOfWorkSqlServer>();
-
+builder.Services.AddTransient<IClientesService, ClientesService>();
+builder.Services.AddTransient<IEstadoReparacionesService, EstadoReparacionesService>();
+builder.Services.AddTransient<IMarcaRepuestosService, MarcaRepuestosService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
