@@ -18,7 +18,7 @@ builder.Services.AddTransient<IClientesService, ClientesService>();
 builder.Services.AddTransient<IEstadoReparacionesService, EstadoReparacionesService>();
 builder.Services.AddTransient<IMarcaRepuestosService, MarcaRepuestosService>();
 builder.Services.AddTransient<IMarcaVehiculosService, MarcaVehiculosServices>();
-
+builder.Services.AddTransient<IMecanicosService, MecanicosService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
