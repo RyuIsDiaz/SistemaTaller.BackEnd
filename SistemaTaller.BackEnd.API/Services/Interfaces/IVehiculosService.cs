@@ -5,9 +5,9 @@ namespace SistemaTaller.BackEnd.API.Services.Interfaces
     public interface IVehiculosService
     {
         List<Vehiculo> SeleccionarTodos();
-        Vehiculo SeleccionarPorId(String id);
+        Vehiculo SeleccionarPorId(string id);
         void Insertar(Vehiculo model);
         void Actualizar(Vehiculo model);
-        void Eliminar(String id);
+        void Eliminar(string id);
     }
 }

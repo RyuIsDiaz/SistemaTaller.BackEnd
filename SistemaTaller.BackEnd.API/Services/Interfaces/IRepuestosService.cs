@@ -5,9 +5,9 @@ namespace SistemaTaller.BackEnd.API.Services.Interfaces
     public interface IRepuestosService
     {
         List<Repuesto> SeleccionarTodos();
-        Repuesto SeleccionarPorId(String id);
+        Repuesto SeleccionarPorId(string id);
         void Insertar(Repuesto model);
         void Actualizar(Repuesto model);
-        void Eliminar(String id);
+        void Eliminar(string id);
     }
 }
