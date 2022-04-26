@@ -8,6 +8,11 @@ namespace SistemaTaller.BackEnd.API.Controllers
     [ApiController]
     public class ReparacionesController : ControllerBase
     {
+        private readonly IReparacionesService ServicioReparaciones;
+        public ClientesController(IReparacionesService ReparacionesService)
+        {
+            ServicioReparaciones = ReparacionesService;
+        }
         // GET: api/<ReparacionesController>
         [HttpGet]
         public IEnumerable<string> Get()
