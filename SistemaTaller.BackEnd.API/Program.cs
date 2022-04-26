@@ -17,8 +17,8 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWorkSqlServer>();
 builder.Services.AddTransient<IClientesService, ClientesService>();
 builder.Services.AddTransient<IEstadoReparacionesService, EstadoReparacionesService>();
 builder.Services.AddTransient<IMarcaRepuestosService, MarcaRepuestosService>();
+builder.Services.AddTransient<IMarcaVehiculosService, MarcaVehiculosServices>();
 
-//86
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
