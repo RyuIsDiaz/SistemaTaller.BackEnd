@@ -5,9 +5,9 @@ namespace SistemaTaller.BackEnd.API.Services.Interfaces
     public interface IMecanicosService
     {
         List<Mecanico> SeleccionarTodos();
-        Mecanico SeleccionarPorId(int id);
+        Mecanico SeleccionarPorId(String id);
         void Insertar(Mecanico model);
         void Actualizar(Mecanico model);
-        void Eliminar(int id);
+        void Eliminar(String id);
     }
 }
