@@ -38,7 +38,9 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-                 private string ObtenerErroresDeModeloInvalido()
+               
+        }
+        private string ObtenerErroresDeModeloInvalido()
         {
 
             var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
@@ -47,7 +49,6 @@ namespace SistemaTaller.BackEnd.API.Controllers
             string ListaDeErroresEnModeloConcatenados = string.Join("\n", ListaDeErroresEnModelo);
 
             return ListaDeErroresEnModeloConcatenados;
-        }
         }
     }
 }

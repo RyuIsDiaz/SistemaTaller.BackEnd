@@ -74,7 +74,7 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
             }
         }
 
-        public Repuesto SeleccionarPorCodigoRepuesto(string CodigoRepuesto)
+        public Repuesto SeleccionarPorId(string CodigoRepuesto)
         {
             var query = "SELECT * FROM FN_Repuestos_SeleccionarPorCodigoRepuesto(@CodigoRepuesto)";
 

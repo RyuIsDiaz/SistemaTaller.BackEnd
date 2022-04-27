@@ -26,6 +26,18 @@ builder.Services.AddTransient<IRepuestosService, RepuestosService>();
 builder.Services.AddTransient<ITalleresService, TalleresService>();
 builder.Services.AddTransient<IVehiculosClienteService, VehiculosClienteService>();
 builder.Services.AddTransient<IVehiculosService, VehiculosServices>();
+
+builder.Services.AddControllers()
+                //.AddJsonOptions(options =>
+                //{
+                //    //Permite que se mantengan las propiedades tal cual se escriben en los modelos
+                //    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                //})
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    //Permite controlar el estado de los modelos cuando llegan a un controlador
+                    options.SuppressModelStateInvalidFilter = true;
+                });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

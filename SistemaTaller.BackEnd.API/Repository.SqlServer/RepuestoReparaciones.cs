@@ -70,7 +70,9 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
             }
         }
 
-        public RepuestoReparacion SeleccionarPorIdReparaciones(int IdReparaciones)
+      
+
+        public RepuestoReparacion SeleccionarPorId(int IdReparaciones)
         {
             var query = "SELECT * FROM FN_RepuestoReparaciones_SeleccionarPorIdReparaciones(@IdReparaciones)";
 

@@ -70,7 +70,7 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
             }
         }
 
-        public Vehiculo SeleccionarPorId(int Id)
+        public Vehiculo SeleccionarPorId(string Id)
         {
             var query = "SELECT * FROM FN_Vehiculos_SeleccionarPorId(@Id)";
 

@@ -10,19 +10,39 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientesController : ControllerBase
+    public class ClienteController : ControllerBase
     {
 
         private readonly IClientesService ServicioDeClientes;
-        public ClientesController(IClientesService ClientesService)
+        public ClienteController(IClientesService ClientesService)
         {
             ServicioDeClientes = ClientesService;
         }
         // GET: api/<ClientesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<ClienteDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Cliente> ListaTodosLosClientes = ServicioDeClientes.SeleccionarTodos();
+
+            List<ClienteDto> ListaTodasLosClientesDto = new();
+
+            foreach (var Clienteseleccionado in ListaTodosLosClientes)
+            {
+                ClienteDto ClienteDTO = new();
+
+                ClienteDTO.Identificacion = Clienteseleccionado.Identificacion;
+                ClienteDTO.Nombre = Clienteseleccionado.Nombre;
+                ClienteDTO.Apellidos = Clienteseleccionado.Apellidos;
+                ClienteDTO.Telefono = Clienteseleccionado.Telefono;
+                ClienteDTO.Email = Clienteseleccionado.Email;
+                ClienteDTO.Direccion = Clienteseleccionado.Direccion;
+
+                
+
+                ListaTodasLosClientesDto.Add(ClienteDTO);
+            }
+
+            return ListaTodasLosClientesDto;
         }
 
         // GET api/<ClientesController>/5
@@ -40,7 +60,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // PUT api/<ClientesController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ClienteDto ClienteDTO)
+        public IActionResult Put(string id, [FromBody] ClienteDto ClienteDTO)
         {
             
             try
@@ -48,14 +68,15 @@ namespace SistemaTaller.BackEnd.API.Controllers
                 if (ModelState.IsValid)
                 {
                     Cliente ClientePorActualizar = new();
-                    ClientePorActualizar.IdentificacionDente = ClienteDTO.Identificacion;
-                    ClientePorActualizar.NombreDeCliente = ClienteDTO.Nombre;
+                    ClientePorActualizar.Identificacion = ClienteDTO.Identificacion;
+                    ClientePorActualizar.Nombre = ClienteDTO.Nombre;
                     ClientePorActualizar.Apellidos = ClienteDTO.Apellidos;
                     ClientePorActualizar.Telefono = ClienteDTO.Telefono;
                     ClientePorActualizar.Email = ClienteDTO.Email;
                     ClientePorActualizar.Direccion = ClienteDTO.Direccion;
-                    ClientePorActualizar.Activo = ClienteDTO.Activo;
                     ClientePorActualizar.ModificadoPor = "fabian" ;
+                    ClientePorActualizar.Activo = true;
+
                    
                     ServicioDeClientes.Actualizar(ClientePorActualizar);
                     return Ok();
@@ -76,7 +97,8 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-             private string ObtenerErroresDeModeloInvalido()
+        }
+        private string ObtenerErroresDeModeloInvalido()
         {
 
             var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
@@ -86,6 +108,6 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
             return ListaDeErroresEnModeloConcatenados;
         }
-        }
-    }
+    
+}
 }

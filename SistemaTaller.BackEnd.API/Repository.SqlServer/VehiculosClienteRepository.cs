@@ -68,7 +68,7 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
             }
         }
 
-        public VehiculoCliente SeleccionarPorId(int Id)
+        public VehiculoCliente SeleccionarPorId(string Id)
         {
             var query = "SELECT * FROM FN_VehiculosCliente_SeleccionarPorId(@IdentificacionCliente)";
 

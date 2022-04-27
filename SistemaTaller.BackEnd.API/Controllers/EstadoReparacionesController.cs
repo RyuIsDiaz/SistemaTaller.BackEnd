@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,7 +11,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
     {
 
          private readonly IEstadoReparacionesService ServicioEstadoReparaciones;
-        public ClientesController(IEstadoReparacionesService EstadoReparacionesService)
+        public EstadoReparacionesController(IEstadoReparacionesService EstadoReparacionesService)
         {
             ServicioEstadoReparaciones = EstadoReparacionesService;
         }
@@ -44,7 +45,9 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-                 private string ObtenerErroresDeModeloInvalido()
+                
+        }
+        private string ObtenerErroresDeModeloInvalido()
         {
 
             var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
@@ -53,7 +56,6 @@ namespace SistemaTaller.BackEnd.API.Controllers
             string ListaDeErroresEnModeloConcatenados = string.Join("\n", ListaDeErroresEnModelo);
 
             return ListaDeErroresEnModeloConcatenados;
-        }
         }
     }
 }
