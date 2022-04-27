@@ -42,7 +42,7 @@ namespace SistemaTaller.BackEnd.API.Services
             }
         }
 
-        public Cliente SeleccionarPorId(String id)
+        public Cliente SeleccionarPorId(string id)
         {
             Cliente ClienteSeleccionado = new();
 

@@ -26,18 +26,19 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
             List<ClienteDto> ListaTodasLosClientesDto = new();
 
-            foreach (var Clienteseleccionado in ListaTodosLosClientes)
+            foreach (var ClienteSeleccionado in ListaTodosLosClientes)
             {
                 ClienteDto ClienteDTO = new();
 
-                ClienteDTO.Identificacion = Clienteseleccionado.Identificacion;
-                ClienteDTO.Nombre = Clienteseleccionado.Nombre;
-                ClienteDTO.Apellidos = Clienteseleccionado.Apellidos;
-                ClienteDTO.Telefono = Clienteseleccionado.Telefono;
-                ClienteDTO.Email = Clienteseleccionado.Email;
-                ClienteDTO.Direccion = Clienteseleccionado.Direccion;
+                ClienteDTO.Identificacion = ClienteSeleccionado.Identificacion;
+                ClienteDTO.Nombre = ClienteSeleccionado.Nombre;
+                ClienteDTO.Apellidos = ClienteSeleccionado.Apellidos;
+                ClienteDTO.Telefono = ClienteSeleccionado.Telefono;
+                ClienteDTO.Email = ClienteSeleccionado.Email;
+                ClienteDTO.Direccion = ClienteSeleccionado.Direccion;
+                ClienteDTO.Activo = ClienteSeleccionado.Activo;
 
-                
+
 
                 ListaTodasLosClientesDto.Add(ClienteDTO);
             }
@@ -47,15 +48,43 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // GET api/<ClientesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public void Get(string Identificacion)
         {
-            return "value";
+           
         }
 
         // POST api/<ClientesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] ClienteDto ClienteDTO)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Cliente ClientePorInsertar = new();
+
+                    ClientePorInsertar.Identificacion = ClienteDTO.Identificacion;
+                    ClientePorInsertar.Nombre = ClienteDTO.Nombre;
+                    ClientePorInsertar.Apellidos = ClienteDTO.Apellidos;
+                    ClientePorInsertar.Telefono = ClienteDTO.Telefono;
+                    ClientePorInsertar.Email = ClienteDTO.Email;
+                    ClientePorInsertar.Direccion = ClienteDTO.Direccion;
+                    ClientePorInsertar.CreadoPor = "Roy";
+                    ServicioDeClientes.Insertar(ClientePorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // PUT api/<ClientesController>/5
@@ -95,8 +124,10 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // DELETE api/<ClientesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
+
         {
+          
         }
         private string ObtenerErroresDeModeloInvalido()
         {
