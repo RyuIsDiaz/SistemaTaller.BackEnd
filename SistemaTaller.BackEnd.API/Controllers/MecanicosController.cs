@@ -55,7 +55,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
         // POST api/<MecanicosController>
         [HttpPost]
         
-        public IActionResult Post([FromBody] MecanicoDto mecanicoDto)
+        public IActionResult Post([FromBody] MecanicoDto MecanicoDto)
         {
             try
             {
@@ -64,14 +64,13 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
                     Mecanico MecanicoPorInsertar = new();
 
-                    ClientePorInsertar.Identificacion = ClienteDTO.Identificacion;
-                    ClientePorInsertar.Nombre = ClienteDTO.Nombre;
-                    ClientePorInsertar.Apellidos = ClienteDTO.Apellidos;
-                    ClientePorInsertar.Telefono = ClienteDTO.Telefono;
-                    ClientePorInsertar.Email = ClienteDTO.Email;
-                    ClientePorInsertar.Direccion = ClienteDTO.Direccion;
-                    ClientePorInsertar.CreadoPor = "Roy";
-                    ServicioDeClientes.Insertar(ClientePorInsertar);
+                    MecanicoPorInsertar.Identificaciones = MecanicoDto.Identificaciones;
+                    MecanicoPorInsertar.Nombre = MecanicoDto.Nombre;
+                    MecanicoPorInsertar.Apellidos = MecanicoDto.Apellidos;
+                    MecanicoPorInsertar.Telefono = MecanicoDto.Telefono;
+                    MecanicoPorInsertar.Email = MecanicoDto.Email;
+                    MecanicoPorInsertar.CreadoPor = "Sebastian";
+                    ServicioMecanicos.Insertar(MecanicoPorInsertar);
 
                     return Ok();
                 }
@@ -90,8 +89,39 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // PUT api/<MecanicosController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        
+        public IActionResult Put(string id, [FromBody] MecanicoDto MecanicoDTO)
         {
+            
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Mecanico MecanicoPorActualizar = new();
+                    
+                   MecanicoPorActualizar.Identificaciones = MecanicoDTO.Identificaciones;
+                   MecanicoPorActualizar.Nombre = MecanicoDTO.Nombre;
+                   MecanicoPorActualizar.Apellidos = MecanicoDTO.Apellidos;
+                   MecanicoPorActualizar.Telefono = MecanicoDTO.Telefono;
+                   MecanicoPorActualizar.Email = MecanicoDTO.Email;
+                    
+                    MecanicoPorActualizar.ModificadoPor = "Sebastian" ;
+                    MecanicoPorActualizar.Activo = true;
+
+                   
+                    ServicioMecanicos.Actualizar(MecanicoPorActualizar);
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // DELETE api/<MecanicosController>/5
