@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Dtos;
+using SistemaTaller.BackEnd.API.Models;
 using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,22 +19,73 @@ namespace SistemaTaller.BackEnd.API.Controllers
         }
         // GET: api/<MecanicosController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<MecanicoDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Mecanico> ListaTodosLosMecanicos = ServicioMecanicos.SeleccionarTodos();
+
+            List<MecanicoDto> ListaTodosLosMecanicosDto = new();
+
+            foreach (var MecanicoSeleccionado in ListaTodosLosMecanicos)
+            {
+                MecanicoDto MecanicoDTO = new();
+
+                MecanicoDTO.Identificaciones = MecanicoSeleccionado.Identificaciones;
+                MecanicoDTO.Nombre = MecanicoSeleccionado.Nombre;
+                MecanicoDTO.Apellidos = MecanicoSeleccionado.Apellidos;
+                MecanicoDTO.Telefono = MecanicoSeleccionado.Telefono;
+                MecanicoDTO.Email = MecanicoSeleccionado.Email;
+                MecanicoDTO.Activo = MecanicoSeleccionado.Activo;
+
+
+
+                ListaTodosLosMecanicosDto.Add(MecanicoDTO);
+            }
+
+            return ListaTodosLosMecanicosDto;
+           
         }
 
         // GET api/<MecanicosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public void Get( string id)
         {
-            return "value";
+            
         }
 
         // POST api/<MecanicosController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        
+        public IActionResult Post([FromBody] MecanicoDto mecanicoDto)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    Mecanico MecanicoPorInsertar = new();
+
+                    ClientePorInsertar.Identificacion = ClienteDTO.Identificacion;
+                    ClientePorInsertar.Nombre = ClienteDTO.Nombre;
+                    ClientePorInsertar.Apellidos = ClienteDTO.Apellidos;
+                    ClientePorInsertar.Telefono = ClienteDTO.Telefono;
+                    ClientePorInsertar.Email = ClienteDTO.Email;
+                    ClientePorInsertar.Direccion = ClienteDTO.Direccion;
+                    ClientePorInsertar.CreadoPor = "Roy";
+                    ServicioDeClientes.Insertar(ClientePorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // PUT api/<MecanicosController>/5

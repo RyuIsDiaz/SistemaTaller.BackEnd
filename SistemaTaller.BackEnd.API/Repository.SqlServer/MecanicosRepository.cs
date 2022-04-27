@@ -27,8 +27,8 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
             command.Parameters.AddWithValue("@Apellidos", mecanico.Apellidos);
             command.Parameters.AddWithValue("@Telefono", mecanico.Telefono);
             command.Parameters.AddWithValue("@Email", mecanico.Email);
+            command.Parameters.AddWithValue("@Activo", mecanico.Activo);
             command.Parameters.AddWithValue("@ModificadoPor", mecanico.ModificadoPor);
-
             command.Parameters.Add("@DetalleError", SqlDbType.VarChar, 60).Direction = ParameterDirection.Output;
             command.Parameters.Add("@ExisteError", SqlDbType.Bit).Direction = ParameterDirection.Output;
 
