@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using 
+using SistemaTaller.BackEnd.API.Dtos;
+using SistemaTaller.BackEnd.API.Models;
 using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,24 +21,21 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpGet]
         public List<MecanicoTallerDto> Get()
         {
-            List<Mecanicotaller> ListaTodosLosMecanicosTaller = ServicioMecanicosTaller.SeleccionarTodos();
+            List<MecanicoTaller> ListaTodosLosMecanicosTaller = ServicioMecanicosTaller.SeleccionarTodos();
 
-            List<MecanicoDto> ListaTodosLosMecanicosDto = new();
+            List<MecanicoTallerDto> ListaTodosLosMecanicosTallerDto = new();
 
-            foreach (var MecanicoSeleccionado in ListaTodosLosMecanicos)
+            foreach (var MecanicoTallerSeleccionado in ListaTodosLosMecanicosTaller)
             {
-                MecanicoDto MecanicoDTO = new();
+                MecanicoTallerDto MecanicoTallerDTO = new();
 
-                MecanicoDTO.Identificaciones = MecanicoSeleccionado.Identificaciones;
-                MecanicoDTO.Nombre = MecanicoSeleccionado.Nombre;
-                MecanicoDTO.Apellidos = MecanicoSeleccionado.Apellidos;
-                MecanicoDTO.Telefono = MecanicoSeleccionado.Telefono;
-                MecanicoDTO.Email = MecanicoSeleccionado.Email;
-                MecanicoDTO.Activo = MecanicoSeleccionado.Activo;
+                MecanicoTallerDTO.IdMecanicos = MecanicoTallerSeleccionado.IdMecanicos;
+                MecanicoTallerDTO.IdTaller = MecanicoTallerSeleccionado.IdTalleres;
+                MecanicoTallerDTO.Activo = MecanicoTallerSeleccionado.Activo;
 
 
 
-                ListaTodosLosMecanicosDto.Add(MecanicoDTO);
+                ListaTodosLosMecanicosTallerDto.Add(MecanicoTallerDTO);
             }
 
             return ListaTodosLosMecanicosDto;
@@ -46,22 +44,83 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // GET api/<MecanicosTallerController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string id)
         {
-            return "value";
+            
         }
 
         // POST api/<MecanicosTallerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+       
+         public IActionResult Post([FromBody] MecanicoTallerDto MecanicoTallerDto)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    MecanicoTaller MecanicoTallerPorInsertar = new();
+
+                    MecanicoTallerPorInsertar.IdMecanicos = MecanicoTallerDto.IdMecanicos;
+                    MecanicoTallerPorInsertar.IdTalleres = MecanicoTallerDto.Nombre;
+                    MecanicoTallerPorInsertar.CreadoPor = "Sebastian";
+                    ServicioMecanicosTaller.Insertar(MecanicoTallerPorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
+
+
+     
+
 
         // PUT api/<MecanicosTallerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        
+        public IActionResult Put(string id, [FromBody] MecanicoTallerDto MecanicoTallerDTO)
         {
+            
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    MecanicoTaller MecanicoTallerPorActualizar = new();
+                    
+                   MecanicoTallerPorActualizar.IdMecanicos = MecanicoTallerDTO.IdMecanicos;
+                   MecanicoTallerPorActualizar.IdTalleres = MecanicoTallerDTO.IdTalleres;
+                  
+                   MecanicoTallerPorActualizar.ModificadoPor = "Sebastian" ;
+                   MecanicoTallerPorActualizar.Activo = true;
+
+                   
+                    ServicioMecanicosTaller.Actualizar(MecanicoTallerPorActualizar);
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
+
+
+
 
         // DELETE api/<MecanicosTallerController>/5
         [HttpDelete("{id}")]
