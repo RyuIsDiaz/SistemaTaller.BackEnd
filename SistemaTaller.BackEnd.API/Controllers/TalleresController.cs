@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Dtos;
+using SistemaTaller.BackEnd.API.Models;
 using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,9 +19,29 @@ namespace SistemaTaller.BackEnd.API.Controllers
         }
         // GET: api/<TalleresController>
         [HttpGet]
-        public IEnumerable<string> Get()
+public List<TallerDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Taller> ListaTodosLosTalleres = ServicioTalleres.SeleccionarTodos();
+
+            List<TallerDto> ListaTodasLosTalleresDto = new();
+
+            foreach (var TalleresSeleccionado in ListaTodosLosTalleres)
+            {
+                TallerDto TalleresDTO = new();
+                TalleresDTO.Id = TalleresSeleccionado.Id;
+                TalleresDTO.Nombre = TalleresSeleccionado.Nombre;
+                TalleresDTO.Telefono = TalleresSeleccionado.Telefono;
+                TalleresDTO.Canton = TalleresSeleccionado.Canton;
+                TalleresDTO.Direccion = TalleresSeleccionado.Direccion;
+                TalleresDTO.Email = TalleresSeleccionado.Email;
+                TalleresDTO.Activo = TalleresSeleccionado.Activo;
+
+
+
+                ListaTodasLosTalleresDto.Add(TalleresDTO);
+            }
+
+            return ListaTodasLosTalleresDto;
         }
 
         // GET api/<TalleresController>/5
@@ -31,14 +53,71 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // POST api/<TalleresController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] TallerDto TalleresDTO)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Taller TalleresPorInsertar = new();
+
+                    TalleresPorInsertar.Id = TalleresDTO.Id;
+                    TalleresPorInsertar.Nombre = TalleresDTO.Nombre;
+                    TalleresPorInsertar.Telefono = TalleresDTO.Telefono;
+                    TalleresPorInsertar.Canton = TalleresDTO.Canton;
+                    TalleresPorInsertar.Direccion = TalleresDTO.Direccion;
+                    TalleresPorInsertar.Email = TalleresDTO.Email;
+                    TalleresPorInsertar.CreadoPor = "Fabián";
+                    ServicioTalleres.Insertar(TalleresPorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // PUT api/<TalleresController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+public IActionResult Put(string id, [FromBody] TallerDto TalleresDTO)
         {
+            
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Taller TalleresPorActualizar = new();
+                    TalleresPorActualizar.Id = TalleresDTO.Id;
+                    TalleresPorActualizar.Nombre = TalleresDTO.Nombre;
+                    TalleresPorActualizar.Telefono = TalleresDTO.Telefono;
+                    TalleresPorActualizar.Canton = TalleresDTO.Canton;
+                    TalleresPorActualizar.Direccion = TalleresDTO.Direccion;
+                    TalleresPorActualizar.Email = TalleresDTO.Email;
+                    TalleresPorActualizar.ModificadoPor = "fabian" ;
+                    TalleresPorActualizar.Activo = true;
+
+                   
+                    ServicioTalleres.Actualizar(TalleresPorActualizar);
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // DELETE api/<TalleresController>/5
