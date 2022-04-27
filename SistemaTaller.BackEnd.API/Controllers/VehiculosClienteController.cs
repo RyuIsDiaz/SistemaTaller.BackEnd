@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Dtos;
+using SistemaTaller.BackEnd.API.Models;
 using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,9 +19,22 @@ namespace SistemaTaller.BackEnd.API.Controllers
         }
         // GET: api/<VehiculosClienteController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<VehiculoClienteDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<VehiculoCliente> ListaTodosLosVehiculosCliente = ServicioVehiculosCliente.SeleccionarTodos();
+
+            List<VehiculoClienteDto> ListaTodasLosVehiculosClienteDto = new();
+
+            foreach (var VehiculoClienteSeleccionado in ListaTodosLosVehiculosCliente)
+            {
+                VehiculoClienteDto VehiculoClienteDTO = new();
+                VehiculoClienteDTO.IdentificacionCliente= VehiculoClienteSeleccionado.IdentificacionCliente;
+                VehiculoClienteDTO.Placa = VehiculoClienteSeleccionado.Placa;
+                VehiculoClienteDTO.Activo = VehiculoClienteSeleccionado.Activo;
+                ListaTodasLosVehiculosClienteDto.Add(VehiculoClienteDTO);
+            }
+
+            return ListaTodasLosVehiculosClienteDto;
         }
 
         // GET api/<VehiculosClienteController>/5
@@ -31,14 +46,65 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // POST api/<VehiculosClienteController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] VehiculoClienteDto VehiculosClienteDTO)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    VehiculoCliente VehiculoClientePorInsertar = new();
+
+                    VehiculoClientePorInsertar.IdentificacionCliente = VehiculosClienteDTO.IdentificacionCliente;
+                    VehiculoClientePorInsertar.Placa = VehiculosClienteDTO.Placa;
+                    VehiculoClientePorInsertar.Activo = VehiculosClienteDTO.Activo;
+                    VehiculoClientePorInsertar.CreadoPor = "Fabián";
+                    ServicioVehiculosCliente.Insertar(VehiculoClientePorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // PUT api/<VehiculosClienteController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(string id, [FromBody] VehiculoClienteDto VehiculosClienteDTO)
         {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    VehiculoCliente VehiculoClientePorActualizar = new();
+                    VehiculoClientePorActualizar.IdentificacionCliente = VehiculosClienteDTO.IdentificacionCliente;
+                    VehiculoClientePorActualizar.Placa = VehiculosClienteDTO.Placa;
+                    VehiculoClientePorActualizar.Activo = VehiculosClienteDTO.Activo;
+                    VehiculoClientePorActualizar.ModificadoPor = "fabian";
+                    VehiculoClientePorActualizar.Activo = true;
+
+
+                    ServicioVehiculosCliente.Actualizar(VehiculoClientePorActualizar);
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // DELETE api/<VehiculosClienteController>/5
