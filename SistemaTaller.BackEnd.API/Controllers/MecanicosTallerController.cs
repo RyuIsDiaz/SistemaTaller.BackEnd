@@ -30,7 +30,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
                 MecanicoTallerDto MecanicoTallerDTO = new();
 
                 MecanicoTallerDTO.IdMecanicos = MecanicoTallerSeleccionado.IdMecanicos;
-                MecanicoTallerDTO.IdTaller = MecanicoTallerSeleccionado.IdTalleres;
+                MecanicoTallerDTO.IdTalleres = MecanicoTallerSeleccionado.IdTalleres;
                 MecanicoTallerDTO.Activo = MecanicoTallerSeleccionado.Activo;
 
 
@@ -38,13 +38,13 @@ namespace SistemaTaller.BackEnd.API.Controllers
                 ListaTodosLosMecanicosTallerDto.Add(MecanicoTallerDTO);
             }
 
-            return ListaTodosLosMecanicosDto;
+            return ListaTodosLosMecanicosTallerDto;
            
         }
 
         // GET api/<MecanicosTallerController>/5
         [HttpGet("{id}")]
-        public string Get(string id)
+        public void Get(string id)
         {
             
         }
@@ -62,7 +62,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
                     MecanicoTaller MecanicoTallerPorInsertar = new();
 
                     MecanicoTallerPorInsertar.IdMecanicos = MecanicoTallerDto.IdMecanicos;
-                    MecanicoTallerPorInsertar.IdTalleres = MecanicoTallerDto.Nombre;
+                    MecanicoTallerPorInsertar.IdTalleres = MecanicoTallerDto.IdTalleres;
                     MecanicoTallerPorInsertar.CreadoPor = "Sebastian";
                     ServicioMecanicosTaller.Insertar(MecanicoTallerPorInsertar);
 

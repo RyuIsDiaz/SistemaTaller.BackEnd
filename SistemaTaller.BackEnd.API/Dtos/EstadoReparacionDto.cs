@@ -6,7 +6,11 @@ namespace SistemaTaller.BackEnd.API.Dtos
     {
         [Required(ErrorMessage = "{0} es un campo obligatorio")]
         [MaxLength(15, ErrorMessage = "{0} tiene que tener máximo {1} caracteres")]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "{0} es un campo obligatorio")]
+        [MaxLength(15, ErrorMessage = "{0} tiene que tener máximo {1} caracteres")]
         public string Estados { get; set; }
+        public string ModificadoPor { get; set; }
 
         public bool? Activo { get; set; }
     }

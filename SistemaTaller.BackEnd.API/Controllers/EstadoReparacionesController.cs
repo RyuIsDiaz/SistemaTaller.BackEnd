@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Dtos;
+using SistemaTaller.BackEnd.API.Models;
 using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,9 +19,28 @@ namespace SistemaTaller.BackEnd.API.Controllers
         }
         // GET: api/<EstadoReparacionesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<EstadoReparacionDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<EstadoReparacion> ListaTodosLosEstadoReparacion = ServicioEstadoReparaciones.SeleccionarTodos();
+
+            List<EstadoReparacionDto> ListaTodosLosEstadoReparacionDto = new();
+
+            foreach (var EstadoReparacionSeleccionado in ListaTodosLosEstadoReparacion)
+            {
+                EstadoReparacionDto EstadoReparacionDTO = new();
+
+                EstadoReparacionDTO.Id = EstadoReparacionSeleccionado.Id;
+                EstadoReparacionDTO.Estados = EstadoReparacionSeleccionado.Estados;
+              
+                EstadoReparacionDTO.Activo = EstadoReparacionSeleccionado.Activo;
+
+
+
+                ListaTodosLosEstadoReparacionDto.Add(EstadoReparacionDTO);
+            }
+
+            return ListaTodosLosEstadoReparacionDto;
+
         }
 
         // GET api/<EstadoReparacionesController>/5
@@ -31,14 +52,63 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // POST api/<EstadoReparacionesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] EstadoReparacionDto EstadoReparacionDTO)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    EstadoReparacion EstadoReparacionPorInsertar = new();
+
+                    EstadoReparacionPorInsertar.Id = EstadoReparacionDTO.Id;
+                    EstadoReparacionPorInsertar.Estados = EstadoReparacionDTO.Estados;
+                    EstadoReparacionPorInsertar.CreadoPor = "Roy";
+                    ServicioEstadoReparaciones.Insertar(EstadoReparacionPorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // PUT api/<EstadoReparacionesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] EstadoReparacionDto EstadoReparacionDTO)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    EstadoReparacion EstadoReparacionPorActualizar = new();
+                    EstadoReparacionPorActualizar.Id = EstadoReparacionDTO.Id;
+                    EstadoReparacionPorActualizar.Estados = EstadoReparacionDTO.Estados;
+                    EstadoReparacionPorActualizar.ModificadoPor = EstadoReparacionDTO.ModificadoPor;
+
+                    EstadoReparacionPorActualizar.Activo = true;
+
+
+                    ServicioEstadoReparaciones.Actualizar(EstadoReparacionPorActualizar);
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
 
         // DELETE api/<EstadoReparacionesController>/5
