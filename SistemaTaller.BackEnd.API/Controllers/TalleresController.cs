@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,7 +11,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
     {
 
         private readonly ITalleresService ServicioTalleres;
-        public ClientesController(ITalleresService TalleresService)
+        public TalleresController(ITalleresService TalleresService)
         {
             ServicioTalleres = TalleresService;
         }
