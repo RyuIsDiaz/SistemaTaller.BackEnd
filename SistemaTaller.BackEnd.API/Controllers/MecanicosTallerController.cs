@@ -18,9 +18,30 @@ namespace SistemaTaller.BackEnd.API.Controllers
         }
         // GET: api/<MecanicosTallerController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<MecanicoTallerDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Mecanicotaller> ListaTodosLosMecanicosTaller = ServicioMecanicosTaller.SeleccionarTodos();
+
+            List<MecanicoDto> ListaTodosLosMecanicosDto = new();
+
+            foreach (var MecanicoSeleccionado in ListaTodosLosMecanicos)
+            {
+                MecanicoDto MecanicoDTO = new();
+
+                MecanicoDTO.Identificaciones = MecanicoSeleccionado.Identificaciones;
+                MecanicoDTO.Nombre = MecanicoSeleccionado.Nombre;
+                MecanicoDTO.Apellidos = MecanicoSeleccionado.Apellidos;
+                MecanicoDTO.Telefono = MecanicoSeleccionado.Telefono;
+                MecanicoDTO.Email = MecanicoSeleccionado.Email;
+                MecanicoDTO.Activo = MecanicoSeleccionado.Activo;
+
+
+
+                ListaTodosLosMecanicosDto.Add(MecanicoDTO);
+            }
+
+            return ListaTodosLosMecanicosDto;
+           
         }
 
         // GET api/<MecanicosTallerController>/5
