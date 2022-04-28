@@ -23,5 +23,5 @@
 		EXEC @NumeroDeError = SP_ErroresBD_Insertar @CreadoPor
 
 		SET @ExisteError = 1
-		SET @DetalleError =  'Error insertando el Estado de reparacion. Número de Error: ' + CONVERT( VARCHAR, @NumeroDeError)
+		SET @DetalleError = 'Error insertando el Estado de reparacion. Número de Error: ' + CONVERT( VARCHAR, @NumeroDeError)
 	END CATCH

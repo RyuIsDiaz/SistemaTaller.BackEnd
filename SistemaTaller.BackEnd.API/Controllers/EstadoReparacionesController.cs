@@ -63,6 +63,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
                     EstadoReparacionPorInsertar.Id = EstadoReparacionDTO.Id;
                     EstadoReparacionPorInsertar.Estados = EstadoReparacionDTO.Estados;
                     EstadoReparacionPorInsertar.CreadoPor = "Roy";
+                   
                     ServicioEstadoReparaciones.Insertar(EstadoReparacionPorInsertar);
 
                     return Ok();
