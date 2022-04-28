@@ -22,7 +22,7 @@ namespace SistemaTaller.BackEnd.API.Services
             }
         }
 
-        public void Eliminar(String id)
+        public void Eliminar(string id)
         {
             using (var bd = BD.Conectar())
             {
