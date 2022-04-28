@@ -28,7 +28,7 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
             command.Parameters.AddWithValue("@Nombre", repuesto.Nombre);
             command.Parameters.AddWithValue("@Precio", repuesto.Precio);
             command.Parameters.AddWithValue("@ModificadoPor", repuesto.ModificadoPor);
-
+            command.Parameters.AddWithValue("@Activo", repuesto.Activo);
             command.Parameters.Add("@DetalleError", SqlDbType.VarChar, 60).Direction = ParameterDirection.Output;
             command.Parameters.Add("@ExisteError", SqlDbType.Bit).Direction = ParameterDirection.Output;
 

@@ -31,7 +31,7 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
             command.Parameters.AddWithValue("@Email", taller.Email);
             command.Parameters.AddWithValue("@Direccion",taller.Direccion);
             command.Parameters.AddWithValue("@ModificadoPor", taller.ModificadoPor);
-
+            command.Parameters.AddWithValue("@Activo", taller.Activo);
             command.Parameters.Add("@DetalleError", SqlDbType.VarChar, 60).Direction = ParameterDirection.Output;
             command.Parameters.Add("@ExisteError", SqlDbType.Bit).Direction = ParameterDirection.Output;
 
