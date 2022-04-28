@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Dtos;
+using SistemaTaller.BackEnd.API.Models;
 using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,9 +19,27 @@ namespace SistemaTaller.BackEnd.API.Controllers
         }
         // GET: api/<MarcaVehiculosController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<MarcaVehiculoDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<MarcaVehiculo> ListaTodosLasMarcaVehiculo = ServicioMarcaVehiculos.SeleccionarTodos();
+
+            List<MarcaVehiculoDto> ListaTodosLasMarcaVehiculoDto = new();
+
+            foreach (var MarcaVehiculoSeleccionado in ListaTodosLasMarcaVehiculo)
+            {
+                MarcaVehiculoDto MarcaVehiculoDTO = new();
+
+                MarcaVehiculoDTO.Id = MarcaVehiculoSeleccionado.Id;
+                MarcaVehiculoDTO.Nombre = MarcaVehiculoSeleccionado.Nombre;
+
+                MarcaVehiculoDTO.Activo = MarcaVehiculoSeleccionado.Activo;
+
+
+
+                ListaTodosLasMarcaVehiculoDto.Add(MarcaVehiculoDTO);
+            }
+
+            return ListaTodosLasMarcaVehiculoDto;
         }
 
         // GET api/<MarcaVehiculosController>/5
@@ -31,31 +51,85 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // POST api/<MarcaVehiculosController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] MarcaVehiculoDto MarcaVehiculoDTO)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    MarcaVehiculo MarcaMarcaVehiculoPorInsertar = new();
+
+                    MarcaMarcaVehiculoPorInsertar.Id = MarcaVehiculoDTO.Id;
+                    MarcaMarcaVehiculoPorInsertar.Nombre = MarcaVehiculoDTO.Nombre;
+
+                    MarcaMarcaVehiculoPorInsertar.CreadoPor = "Roy";
+                    ServicioMarcaVehiculos.Insertar(MarcaMarcaVehiculoPorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+
+            }
         }
 
-        // PUT api/<MarcaVehiculosController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            // PUT api/<MarcaVehiculosController>/5
+            [HttpPut("{id}")]
+            public IActionResult Put(int id, [FromBody] MarcaVehiculoDto MarcaVehiculoDTO)
+            {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    MarcaVehiculo MarcaVehiculoPorActualizar = new();
+                    MarcaVehiculoPorActualizar.Id = MarcaVehiculoDTO.Id;
+                    MarcaVehiculoPorActualizar.Nombre = MarcaVehiculoDTO.Nombre;
+                    
+                    MarcaVehiculoPorActualizar.ModificadoPor = "fabian";
+                    MarcaVehiculoPorActualizar.Activo = true;
+
+
+                    ServicioMarcaVehiculos.Actualizar(MarcaVehiculoPorActualizar);
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
+
         }
 
-        // DELETE api/<MarcaVehiculosController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-                
-        }
-        private string ObtenerErroresDeModeloInvalido()
-        {
+            // DELETE api/<MarcaVehiculosController>/5
+            [HttpDelete("{id}")]
+            public void Delete(int id)
+            {
 
-            var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
-                                                     .Select(k => ModelState[k].Errors.First().ErrorMessage);
+            }
+            private string ObtenerErroresDeModeloInvalido()
+            {
 
-            string ListaDeErroresEnModeloConcatenados = string.Join("\n", ListaDeErroresEnModelo);
+                var ListaDeErroresEnModelo = ModelState.Keys.Where(i => ModelState[i].Errors.Count > 0)
+                                                         .Select(k => ModelState[k].Errors.First().ErrorMessage);
 
-            return ListaDeErroresEnModeloConcatenados;
+                string ListaDeErroresEnModeloConcatenados = string.Join("\n", ListaDeErroresEnModelo);
+
+                return ListaDeErroresEnModeloConcatenados;
+            }
         }
     }
-}
+
