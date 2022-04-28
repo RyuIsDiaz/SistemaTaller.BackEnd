@@ -24,7 +24,8 @@ namespace SistemaTaller.BackEnd.API.Repository.SqlServer
 
             command.Parameters.AddWithValue("@IdentificacionCliente", vehiculocliente.IdentificacionCliente);
             command.Parameters.AddWithValue("@ModificadoPor", vehiculocliente.ModificadoPor);
-
+            command.Parameters.AddWithValue("@Activo", vehiculocliente.Activo);
+            
             command.Parameters.Add("@DetalleError", SqlDbType.VarChar, 60).Direction = ParameterDirection.Output;
             command.Parameters.Add("@ExisteError", SqlDbType.Bit).Direction = ParameterDirection.Output;
 

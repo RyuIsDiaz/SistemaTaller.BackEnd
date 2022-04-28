@@ -4,7 +4,8 @@ namespace SistemaTaller.BackEnd.API.Dtos
 {
     public class ReparacionDto
     {
-		[Required(ErrorMessage = "{0} es un campo obligatorio")]
+		
+       [Required(ErrorMessage = "{0} es un campo obligatorio")]
 		public DateTime FechasIngreso { get; set; }
 
 		[Required(ErrorMessage = "{0} es un campo obligatorio")]
@@ -15,6 +16,10 @@ namespace SistemaTaller.BackEnd.API.Dtos
 		public string PlacasVehiculos { get; set; }
 
 		[Required(ErrorMessage = "{0} es un campo obligatorio")]
+		public int IdReparaciones { get; set; }
+
+
+        [Required(ErrorMessage = "{0} es un campo obligatorio")]
 		[MaxLength(20, ErrorMessage = "{0} tiene que tener máximo {1} caracteres")]
 		public string IdMecanicos { get; set; }
 
@@ -30,6 +35,10 @@ namespace SistemaTaller.BackEnd.API.Dtos
 
 		[Required(ErrorMessage = "{0} es un campo obligatorio")]
 		public decimal MontosRepuestos { get; set; }
+
+		[Required(ErrorMessage = "{0} es un campo obligatorio")]
+		public decimal? MontosTotales { get; set; }
+
 
 		public bool? Activo { get; set; }
 

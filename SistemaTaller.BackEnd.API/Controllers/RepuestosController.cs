@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaTaller.BackEnd.API.Dtos;
+using SistemaTaller.BackEnd.API.Models;
 using SistemaTaller.BackEnd.API.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,29 +19,110 @@ namespace SistemaTaller.BackEnd.API.Controllers
         }
         // GET: api/<RepuestosController>
         [HttpGet]
-        public IEnumerable<string> Get()
+
+        public List<RepuestoDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Repuesto> ListaTodosLosRepuestos = ServicioRepuesto.SeleccionarTodos();
+
+            List<RepuestoDto> ListaTodosLosRepuestosDto = new();
+
+            foreach (var RepuestoSeleccionado in ListaTodosLosRepuestos)
+            {
+                RepuestoDto RepuestoDTO = new();
+
+                RepuestoDTO.CodigoRepuesto= RepuestoSeleccionado.CodigoRepuesto;
+                RepuestoDTO.Nombre = RepuestoSeleccionado.Nombre;
+                RepuestoDTO.IdMarca = RepuestoSeleccionado.IdMarca;
+                RepuestoDTO.Precio = RepuestoSeleccionado.Precio;
+                RepuestoDTO.Activo = RepuestoSeleccionado.Activo;
+
+
+
+                ListaTodosLosRepuestosDto.Add(RepuestoDTO);
+            }
+
+            return ListaTodosLosRepuestosDto;
         }
 
-        // GET api/<RepuestosController>/5
+
+
+     // GET api/<RepuestosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public void Get(string CodigoRepuesto)
         {
-            return "value";
+
         }
 
         // POST api/<RepuestosController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] RepuestoDto RepuestoDTO)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                   Repuesto RepuestoPorInsertar = new();
+
+                    RepuestoPorInsertar.Nombre = RepuestoDTO.Nombre;
+                    RepuestoPorInsertar.CodigoRepuesto = RepuestoDTO.CodigoRepuesto;
+                    RepuestoPorInsertar.IdMarca = RepuestoDTO.IdMarca;
+                    RepuestoPorInsertar.Precio = RepuestoDTO.Precio;
+                    RepuestoPorInsertar.CreadoPor = "Sebastian";
+                    ServicioRepuesto.Insertar(RepuestoPorInsertar);
+
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
+
 
         // PUT api/<RepuestosController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(string id, [FromBody] RepuestoDto RepuestoDTO)
         {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Repuesto RepuestoPorActualizar = new();
+
+                    RepuestoPorActualizar.CodigoRepuesto = RepuestoDTO.CodigoRepuesto;
+                    RepuestoPorActualizar.Nombre = RepuestoDTO.Nombre;
+                    RepuestoPorActualizar.IdMarca = RepuestoDTO.IdMarca;
+                    RepuestoPorActualizar.Precio = RepuestoDTO.Precio;
+            
+                    RepuestoPorActualizar.ModificadoPor = "fabian";
+                    RepuestoPorActualizar.Activo = true;
+
+
+                    ServicioRepuesto.Actualizar(RepuestoPorActualizar);
+                    return Ok();
+                }
+                else
+                {
+                    string ErroreEnElModelo = ObtenerErroresDeModeloInvalido();
+                    return BadRequest(ErroreEnElModelo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex.Message);
+            }
         }
+
+
+
 
         // DELETE api/<RepuestosController>/5
         [HttpDelete("{id}")]
