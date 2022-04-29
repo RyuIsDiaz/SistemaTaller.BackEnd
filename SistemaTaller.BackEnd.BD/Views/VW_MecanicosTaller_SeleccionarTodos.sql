@@ -2,4 +2,4 @@
 
 CREATE VIEW VW_MecanicosTaller_SeleccionarTodos
 AS 
-	SELECT IdMecanicos, IdTalleres FROM MecanicosTaller WHERE Activo = 1
+	SELECT * FROM MecanicosTaller WHERE Activo = 1

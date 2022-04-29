@@ -2,4 +2,4 @@
 
 CREATE VIEW VW_MarcaVehiculos_SeleccionarTodos
 AS 
-	SELECT Id, Nombre FROM MarcaVehiculos WHERE Activo = 1
+	SELECT * FROM MarcaVehiculos WHERE Activo = 1

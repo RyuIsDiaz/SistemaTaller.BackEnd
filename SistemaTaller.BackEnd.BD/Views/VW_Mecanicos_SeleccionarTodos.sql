@@ -4,4 +4,4 @@
 
 CREATE VIEW VW_Mecanicos_SeleccionarTodos
 AS 
-	SELECT Identificaciones, Nombre, Apellidos FROM Mecanicos WHERE Activo = 1
+	SELECT * FROM Mecanicos WHERE Activo = 1

@@ -2,4 +2,4 @@
 
 CREATE VIEW VW_Talleres_SeleccionarTodos
 AS 
-	SELECT Id, Nombre FROM Talleres WHERE Activo = 1
+	SELECT * FROM Talleres WHERE Activo = 1

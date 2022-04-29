@@ -1,3 +1,3 @@
 ﻿CREATE VIEW VW_Reparaciones_SeleccionarTodos
 AS 
-	SELECT IdReparaciones FROM Reparaciones WHERE Activo = 1
+	SELECT * FROM Reparaciones WHERE Activo = 1
