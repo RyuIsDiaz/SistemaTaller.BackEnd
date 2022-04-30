@@ -22,11 +22,11 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpGet]
         public List<ClienteDto> Get()
         {
-            List<Cliente> ListaTodosLosClientes = ServicioDeClientes.SeleccionarTodos();
+            List<Cliente> ListaTodasLosClientes = ServicioDeClientes.SeleccionarTodos();
 
             List<ClienteDto> ListaTodasLosClientesDto = new();
 
-            foreach (var ClienteSeleccionado in ListaTodosLosClientes)
+            foreach (var ClienteSeleccionado in ListaTodasLosClientes)
             {
                 ClienteDto ClienteDTO = new();
 
@@ -48,9 +48,29 @@ namespace SistemaTaller.BackEnd.API.Controllers
 
         // GET api/<ClientesController>/5
         [HttpGet("{id}")]
-        public void Get(string Identificacion)
+        public IActionResult Get(string Id)
         {
+            Cliente Clienteseleccionado = new();
+
+            Clienteseleccionado = ServicioDeClientes.SeleccionarPorId(Id);
+
+            if (Clienteseleccionado.Identificacion == "")
+            {
+                return NotFound("Cliente no encontrado");
+            }
+
+            ClienteDto ClienteDTO = new();
+
+            ClienteDTO.Identificacion = Clienteseleccionado.Identificacion;
+            ClienteDTO.Nombre = Clienteseleccionado.Nombre;
+            ClienteDTO.Apellidos = Clienteseleccionado.Apellidos;
+            ClienteDTO.Telefono = Clienteseleccionado.Telefono;
+            ClienteDTO.Email = Clienteseleccionado.Email;
+            ClienteDTO.Direccion = Clienteseleccionado.Direccion;
            
+            ClienteDTO.Activo = Clienteseleccionado.Activo;
+
+            return Ok(ClienteDTO);
         }
 
         // POST api/<ClientesController>

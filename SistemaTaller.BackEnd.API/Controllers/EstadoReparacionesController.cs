@@ -92,7 +92,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
                     EstadoReparacion EstadoReparacionPorActualizar = new();
                     EstadoReparacionPorActualizar.Id = EstadoReparacionDTO.Id;
                     EstadoReparacionPorActualizar.Estados = EstadoReparacionDTO.Estados;
-                    EstadoReparacionPorActualizar.ModificadoPor = EstadoReparacionDTO.ModificadoPor;
+                    EstadoReparacionPorActualizar.ModificadoPor = "roy";
 
                     EstadoReparacionPorActualizar.Activo = true;
 

@@ -21,7 +21,7 @@ namespace SistemaTaller.BackEnd.API.Controllers
         [HttpGet]
 public List<VehiculoDto> Get()
         {
-            List<Vehiculos> ListaTodosLosVehiculos = ServicioVehiculos.SeleccionarTodos();
+            List<Vehiculo> ListaTodosLosVehiculos = ServicioVehiculos.SeleccionarTodos();
 
             List<VehiculoDto> ListaTodasLosVehiculosDto = new();
 

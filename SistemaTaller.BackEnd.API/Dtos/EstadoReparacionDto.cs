@@ -10,8 +10,8 @@ namespace SistemaTaller.BackEnd.API.Dtos
        
         public string Estados { get; set; }
         
-        [MaxLength(15, ErrorMessage = "{0} tiene que tener máximo {1} caracteres")]
-        public string ModificadoPor { get; set; }
+        
+      
        
        
         public bool? Activo { get; set; }

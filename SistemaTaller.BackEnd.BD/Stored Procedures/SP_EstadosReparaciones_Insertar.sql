@@ -6,18 +6,18 @@
 	@DetalleError VARCHAR(60) OUTPUT
 	AS
 	BEGIN TRY		
-		BEGIN TRANSACTION
+		SAVE TRANSACTION TR
 			
 			INSERT INTO EstadoReparaciones(Id, Estados, CreadoPor)
 			VALUES(@Id, @Estados, @CreadoPor)		
 
 			SET @ExisteError = 0
 
-		COMMIT TRANSACTION
+		COMMIT TRANSACTION TR
 	END TRY
 	BEGIN CATCH
 
-	ROLLBACK TRANSACTION
+	ROLLBACK TRANSACTION TR
 
 	DECLARE @NumeroDeError INT 
 		EXEC @NumeroDeError = SP_ErroresBD_Insertar @CreadoPor
